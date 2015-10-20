@@ -89,10 +89,12 @@ func main() {
 		fmt.Println("+=====================================+")
 		fmt.Println("|  Checking for page update.........  |")
 		fmt.Println("+=====================================+")
+		fmt.Println("Use CTRL+C to Exit")
 	} else {
 		fmt.Println(CLR_G + "+=====================================+" + CLR_N)
 		fmt.Println(CLR_G + "|  Checking for page update.........  |" + CLR_N)
 		fmt.Println(CLR_G + "+=====================================+" + CLR_N)
+		fmt.Println(CLR_R + "Use CTRL+C to Exit" + CLR_N)
 	}
 	c := cron.New()
 	c.AddFunc(cfg.Pushbullet.Cron, func() { getPackPubFree() })

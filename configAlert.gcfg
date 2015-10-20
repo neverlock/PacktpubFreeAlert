@@ -1,3 +1,5 @@
 [pushbullet]
 apikey = Bearer [your access token]
-cron = */3 * * * * *
+
+#check packpub every 6hr
+cron = 0 0 */6 * * *
