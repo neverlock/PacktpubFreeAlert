@@ -16,8 +16,10 @@ import (
 
 type Config struct {
 	Pushbullet struct {
-		APIKEY string
-		Cron   string
+		APIKEY  string
+		Img1    string
+		Cron    string
+		Traffic string
 	}
 }
 
@@ -73,6 +75,23 @@ func getPackPubFree() {
 	}
 }
 
+func getTUTrafficPic() {
+	//{"type":"file","file_name":"tu_traffic.png","file_type":"image/png","file_url":"http://58.137.208.76/DOHWeb/SiteCameraHandler.ashx?site=PER-3-002_2"}
+	log.Println("Update Picture")
+	urlStr := "https://api.pushbullet.com/v2/pushes"
+	alertString := fmt.Sprintf("{\"type\":\"file\",\"file_name\":\"tu_traffic.png\",\"file_type\":\"image/png\",\"file_url\":\"%s\"}", cfg.Pushbullet.Img1)
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", urlStr, strings.NewReader(alertString))
+	req.Header.Set("Authorization", cfg.Pushbullet.APIKEY)
+	req.Header.Set("Content-Type", "application/json")
+	resp, _ := client.Do(req)
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(string(body))
+}
+
 func init() {
 	flag.StringVar(&color, "c", "n", "default is n please use y for print color")
 	flag.Parse()
@@ -98,7 +117,10 @@ func main() {
 	}
 	c := cron.New()
 	c.AddFunc(cfg.Pushbullet.Cron, func() { getPackPubFree() })
+	t := cron.New()
+	t.AddFunc(cfg.Pushbullet.Traffic, func() { getTUTrafficPic() })
 	go c.Start()
+	go t.Start()
 	sig := make(chan os.Signal)
 	signal.Notify(sig, os.Interrupt, os.Kill)
 	<-sig
