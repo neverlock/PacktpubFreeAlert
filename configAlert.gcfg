@@ -1,8 +1,10 @@
 [pushbullet]
-apikey = Bearer o.sa6Yvv6xyCDVAAkJggtQCCowHb9rL31r
+apikey = Bearer [your api key]
 
 #get Thailand Traffic image from http://www.highwaytraffic.go.th/DOHWeb/Home.aspx
 img1 = http://58.137.208.76/DOHWeb/SiteCameraHandler.ashx?site=PER-3-002_2
 #check packpub every 6hr
-cron = 0 0 */6 * * *
+cron = 0 */2 * * * *
 traffic = 0 */2 * * * *
+email = "neverlock@gmail.com"
+email = "wormhwhs@gmail.com"

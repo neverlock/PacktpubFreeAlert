@@ -23,7 +23,7 @@ var color string
 var server string
 var msg string
 var email string
-var APIKEY = "Bearer [your APIKEY]"
+var APIKEY = "Bearer o.c0aRKX5uChyS6CML3ol6AVYfRIMxXYbq"
 var CHANNEL_TAG = "rusupport"
 
 func getPackPubFree(Server string, MSG string) {
